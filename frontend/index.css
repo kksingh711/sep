@@ -1,0 +1,4 @@
+a {text-decoration: none; padding:15px; font-weight:bold;float:right; }
+a:link {color:#aaf5f1;}
+a:hover {color:#ffffff; background-color:#000060; }
+a:visited{color:#aaf5f1}
