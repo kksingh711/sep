@@ -1,4 +1,48 @@
-a {text-decoration: none; padding:15px; font-weight:bold;float:right; }
-a:link {color:#aaf5f1;}
-a:hover {color:#ffffff; background-color:#000060; }
-a:visited{color:#aaf5f1}
+*{
+    overflow: hidden;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+    position: relative;
+    float: right;
+    padding: 40px 20px;
+    margin-right: 50px;
+    color: white;
+}
+
+.navbar {
+    margin: 0%; 
+    padding-top: 0%; 
+    height: 15vh; 
+    background-color: #000;
+}
+
+.fx {
+    display: flex;
+}
+.box {
+    border: 2px solid black;
+    margin: 50px;
+    margin-top: 15%;
+    padding: 20px;
+    box-shadow: 2px 4px 4px rgb(0,0,0,0.5);
+}
+
+h2 {
+    font-size: 40px;
+}
+
+.mainimg {
+    position: absolute;
+    right: 0;
+    height: 650px;
+    width: 950px;
+    padding: 50px;
+    padding-top: 0;
+}
