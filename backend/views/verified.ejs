@@ -5,24 +5,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>verified</title>
-    <style>
-        .ele{
-            height: 30vh;
-            width:60vh;
-            margin: 10px;
-            float: left;
-        }
-        button{
-            clear: both;
-        }
-    </style>
+    <link rel="stylesheet" href="/css/index.css">
 </head>
 <body>
-    <div style="height:15vh;background-color: red;color: white;text-align: center;"><h1>WELCOME USER</h1></div>
-    <div align="right">
-        <div class="ele" style="background-image:url(../public/res/pref.jfif);background-size: contain; background-repeat: no-repeat;"><a href="./selection">Click Here!</a></div>
-        <div class="ele" style="background-image:url(./colorful-logo-chat_1017-1721.jpg);background-size: contain; background-repeat: no-repeat;"></div>
-        <div class="ele" style="background-image:url(./trending.jfif);background-size: contain;"></div>
-        </div>
+    <div class="navbar">
+        <span style="width:100px; height:100px; padding: 20px;"><a href="./"><img src="/res/logo.png"alt="not found logo" height="100%"></a></span>
+        <span><a href="./login" class="navv">Log In</a></span>
+        <span><a href="./signup" class="navv">Sign Up</a></span>
+        <span><a href="./team" class="navv">Our Team</a></span>
+        <span><a href="./contact" class="navv">Contact Us</a></span>        
+    </div>
+    <form action="./selection" method="get">
+        <button type="submit" name="opt" value="chat" >Chat</button>
+        <button type="submit" name="opt" value="read">Read</button>
+    </form>
 </body>
 </html>

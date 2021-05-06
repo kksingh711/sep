@@ -8,7 +8,7 @@
     <style>
         .ele{
             height: 30vh;
-            width:60vh;
+            width:25vw;
             margin: 30px;
             float: left;
             
@@ -19,53 +19,56 @@
             left: 12%;
             font-size: 25px;
         }
-
-        #a1 {
-            left: 45%;
-        }
-
-        #a2 {
-            left: 75%;
-        }
-
-        #a3 {
-            top: 80%;
-        }
-
-        #a4 {
-            top: 80%;
-            left: 45%;
-        }
-
-        #a5 {
-            top: 80%;
-            left: 75%;
-        }
+        .bu{background-color:rgb(0,0,0);
+           border-radius: 5px;
+           height:50px;
+           width:100px;
+           color:white;
+           box-shadow: gray;}
+        body {
+  background: #aaa;
+  background: -webkit-linear-gradient(right,#aaa, #000);
+  background: -moz-linear-gradient(right, #aaa, #000);
+  background: -o-linear-gradient(right, #aaa, #000);
+  background: linear-gradient(to left, #aaa, #000);
+  font-family: "Roboto", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;    
+  color: white;  
+}
     </style>
+    <link rel="stylesheet" href="/css/index.css">
 </head>
 <body>
+    <div class="navbar">
+        <span style="width:100px; height:100px; padding: 20px;"><a href="./"><img src="/res/logo.png"alt="not found logo" height="100%"></a></span>
+        <span><a href="./login" class="navv">Log In</a></span>
+        <span><a href="./signup" class="navv">Sign Up</a></span>
+        <span><a href="./team" class="navv">Our Team</a></span>
+        <span><a href="./contact" class="navv">Contact Us</a></span>        
+    </div>
     <div align="center">
-    <h1>Please make choices</h1>
-    <div class="ele" style="background-image:url(./politics.jpg);background-size: contain;">
-        <h5>Politics</h5>
+    <h1>What's your mood?</h1>
+    <form action="./news" method="GET">
+    <div class="ele" style="background-image:url(/res/politics.jpg);background-size: contain;">
+        <button type="submit" name="newval" value="politics" class="bu">Politics</button>
     </div>
-    <div class="ele" style="background-image:url(./cricket.jpg);background-size: contain;">
-        <h5 id="a1">Cricket</h5>
+    <div class="ele" style="background-image:url(/res/cricket.jpg);background-size: contain;">
+        <button type="submit" name="newval" value="cricket" class="bu">Cricket</button>
     </div>
-    <div class="ele" style="background-image:url(./bollywood.jpeg);background-size: contain;">
-        <h5 id="a2">Bollywood</h5>
+    <div class="ele" style="background-image:url(/res/bollywood.jpeg);background-size: contain;">
+        <button type="submit" name="newval" value="bollywood" class="bu">Bollywood</button>
     </div>
-    <div class="ele" style="background-image:url(./economy.jfif);background-size: contain;">
-        <h5 id="a3">Economy</h5>
+    <div class="ele" style="background-image:url(/res/economy.jfif);background-size: contain;">
+        <button type="submit" name="newval" value="economy" class="bu">Economy</button>
     </div>
-    <div class="ele" style="background-image:url(./videogame.jfif);background-size: contain;">
-        <h5 id="a4">Video Game</h5>
+    <div class="ele" style="background-image:url(/res/videogame.jfif);background-size: contain;">
+        <button type="submit" name="newval" value="videoGames" class="bu">Vidoe Games</button>
     </div>
-    <div class="ele" style="background-image:url(./history.jfif);background-size: contain;">
-        <h5 id="a5">History</h5>
-    </div><br>
-    </div>
-    
+    <div class="ele" style="background-image:url(/res/history.jfif);background-size: contain;">
+        <button type="submit" name="newval" value="history" class="bu">History</button>
+    </div><br></form>
+    </div>   
 
 </body>
 </html>

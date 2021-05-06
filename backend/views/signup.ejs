@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TT</title>
     <style>
-      a {
+      .navv {
             text-decoration: none;
             position: relative;
             float: right;
@@ -52,6 +52,16 @@
            color:white;
            box-shadow: gray;
        }
+       body {
+  background: #aaa;
+  background: -webkit-linear-gradient(right,#aaa, #000);
+  background: -moz-linear-gradient(right, #aaa, #000);
+  background: -o-linear-gradient(right, #aaa, #000);
+  background: linear-gradient(to left, #aaa, #000);
+  font-family: "Roboto", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;      
+}
     </style>
     
     
@@ -59,13 +69,13 @@
 <body style="background-color: #aaa;">
 
   <div class="navbar">
-    <span style="width:100px; height:100px; padding: 20px;"><img src="../res/logo.png"alt="" height="100%"></span>
-    <span><a href="./login">Log In</a></span>
-    <span><a href="./signup">Sign Up</a></span>
-    <span><a href="./team">Our Team</a></span>
-    <span><a href="./contact">Contact Us</a></span>        
+    <span style="width:100px; height:100px; padding: 20px;"><a href="./"><img src="/res/logo.png"alt="not found logo" height="100%"></a></span>
+    <span><a href="./login" class="navv">Log In</a></span>
+    <span><a href="./signup" class="navv">Sign Up</a></span>
+    <span><a href="./team" class="navv">Our Team</a></span>
+    <span><a href="./contact" class="navv">Contact Us</a></span>        
 </div>
-
+  <form action="/login" method="post">
   <div class="con">
   <h1 style="margin-bottom: 0px;">Sign Up</h1>
   <p style="margin-top: 0px;">Please fill this form to create account</p>
@@ -79,5 +89,6 @@
   <input type="checkbox">I accept the terms of use and privacy policy</a>. <br> <br>
   <button class="bu"><h3>Sign Up</h3></button>
   </div>
+</form>
 </body>
 </html>
