@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News</title>   
+    <link rel="stylesheet" href="/css/index.css">
+    <style>
+        .details{
+            background-color: rgb(112, 52, 52);
+            box-shadow: none;
+            color: white;
+        }
+        h3{
+            background-color: skyblue;
+            color: white;
+        }
+        .readmore{
+            padding:0px;
+            margin:0px;
+            color:black;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar";">
+        <span style="width:100px; height:100px; padding: 20px;"><img src="/res/logo.png"alt="not found logo" height="100%"></span>
+        <span><a href="./login">Log In</a></span>
+        <span><a href="./signup">Sign Up</a></span>
+        <span><a href="./team">Our Team</a></span>
+        <span><a href="./contact">Contact Us</a></span>        
+    </div>
+    <%for(i=0;i<10;i++){%>
+    <div style="width:75vw; text-align: center; margin: auto;">
+        
+    <h3><%= data["articles"][i]["title"] %></h3>
+    <button class="details"><%= data["articles"][i]["source"]["name"] %></button>
+        <button class="details"><%= data["articles"][i]["author"] %></button>
+<p><%= data["articles"][i]["description"] %></p>
+
+<button><a href="<%= data["articles"][i]["url"] %>" class="readmore" target="_blank">Read More</a></button>
+</div>
+                <%}%>    
+</body>
+</html>
