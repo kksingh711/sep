@@ -5,26 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Select</title>
-    <style>
-        .ele{
-            height: 30vh;
-            width:25vw;
-            margin: 30px;
-            float: left;
-            
-        }
-        h5 {
-            position: absolute;
-            top: 40%;
-            left: 12%;
-            font-size: 25px;
-        }
-        .bu{background-color:rgb(0,0,0);
-           border-radius: 5px;
-           height:50px;
-           width:100px;
-           color:white;
-           box-shadow: gray;}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>        
         body {
   background: #aaa;
   background: -webkit-linear-gradient(right,#aaa, #000);
@@ -34,10 +16,15 @@
   font-family: "Roboto", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;    
-  color: white;  
-}
+  color: white; }
+  .card-img-top {
+    width: 100%;
+    height: 15vw;
+    object-fit:inherit;
+} 
     </style>
     <link rel="stylesheet" href="/css/index.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
 </head>
 <body>
     <div class="navbar">
@@ -46,29 +33,30 @@
         <span><a href="./signup" class="navv">Sign Up</a></span>
         <span><a href="./team" class="navv">Our Team</a></span>
         <span><a href="./contact" class="navv">Contact Us</a></span>        
-    </div>
-    <div align="center">
-    <h1>What's your mood?</h1>
-    <form action="./news" method="GET">
-    <div class="ele" style="background-image:url(/res/politics.jpg);background-size: contain;">
-        <button type="submit" name="newval" value="politics" class="bu">Politics</button>
-    </div>
-    <div class="ele" style="background-image:url(/res/cricket.jpg);background-size: contain;">
-        <button type="submit" name="newval" value="cricket" class="bu">Cricket</button>
-    </div>
-    <div class="ele" style="background-image:url(/res/bollywood.jpeg);background-size: contain;">
-        <button type="submit" name="newval" value="bollywood" class="bu">Bollywood</button>
-    </div>
-    <div class="ele" style="background-image:url(/res/economy.jfif);background-size: contain;">
-        <button type="submit" name="newval" value="economy" class="bu">Economy</button>
-    </div>
-    <div class="ele" style="background-image:url(/res/videogame.jfif);background-size: contain;">
-        <button type="submit" name="newval" value="videoGames" class="bu">Vidoe Games</button>
-    </div>
-    <div class="ele" style="background-image:url(/res/history.jfif);background-size: contain;">
-        <button type="submit" name="newval" value="history" class="bu">History</button>
-    </div><br></form>
-    </div>   
+    </div>    
+    <div class="container">
+        <h1 style="color:white;margin-top: 1rem;"">What's your mood?</h1>
+        <div class="row">
+    <div class="card-deck">
+        <%inte.forEach(function(ini){%>
+            <div class="col-md-3 col-sm-6" style="padding-top: 3rem;">
+        <div class="card">
+            <img src="<%=ini.imgurl%>" class="card-img-top" alt="...">
+            <div class="card-body" style="color:black;padding:0px;border: none;">
+                <p style="margin: 0%;text-align: center;"><b><%=(ini.name).toUpperCase()%></b></p>
+                <a href="./chat/<%=ini._id%>" class="btn btn-primary"style="width:50%;border-bottom-right-radius: 0%;border-top-right-radius: 0%;color:white;float:left">CHAT</a>
+              <a href="./news/<%=ini._id%>" class="btn btn-dark" style="width:50%;border-bottom-left-radius: 0%;border-top-left-radius: 0%;color:aqua">READ</a>
+            </div>
+          </div></div><%})%>
 
+    </div>
+</div><div style="padding: 15px; text-align: center;"><a  href="/addnew" class="btn btn-primary" style="margin: 2rem;">Can't find your mood?<br>Add it here!</a></div>
+</div>
+     <a href="./" style="color: aliceblue;">erbe</a>   
+        
+        
+    
+       
+        
 </body>
 </html>
