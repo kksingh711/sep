@@ -12,6 +12,7 @@ const io=socketio(server);
 app.use(bodyParser.urlencoded({extended:true}));
 const mongoose=require("mongoose");
 mongoose.connect("mongodb://localhost:27017/wechat", { useNewUrlParser: true,useUnifiedTopology: true });
+const port=3000 || process.env.PORT;
 app.get("/",function(req,res){
     res.render("index.ejs");
 });
@@ -23,7 +24,7 @@ var topicdb=new mongoose.model("topicdb",topicdbSchema);
 app.get("/news/:id",function(req,res){
     idd=req.params.id;
     topicdb.find({_id:idd},function(err,ff){
-        if(!err){
+        if(!err && ff.length>0){
             let topic=ff[0]["name"];
             var url="https://newsapi.org/v2/everything?q="+topic+"&sortBy=popularity&apiKey=fca7abc7e5334b0fb7bd9f9ae7b347af"
     request(url,function (error,response,body) {
@@ -61,9 +62,6 @@ socket.on("disconnect",()=>{
 });
 app.get("/chat",function(req,res){
     res.render("chat.ejs");
-});
-app.get("/reqnews",function (req,res) {
-    res.render("reqnews.ejs");
 });
 app.post("/login",function(req,res){
     res.render("login.ejs");
@@ -117,7 +115,7 @@ app.get("/addnew",function(req,res){
 app.get("*",function (req,res) {
     res.render("notfound.ejs");
 });
-server.listen(3000,function() {
+server.listen(port,function() {
     console.log("Server Started!!");
     
 });
