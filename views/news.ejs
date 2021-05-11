@@ -4,37 +4,53 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>News</title>  
+    <title>WeChat</title>  
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.1.4/semantic.min.css" integrity="sha512-dEiw9Y+mvqQrQC3EwAKP4Bc9LGyola/4tCIRCq7c7VytHO9HUVW7+CmXCirQvLhx4EwqSbUulm6FlG1wHO/SSg==" crossorigin="anonymous" /> 
     <link rel="stylesheet" href="/css/index.css">
+    <style>
+        body {
+  background: #aaa;
+  background: -webkit-linear-gradient(right,#aaa, #000);
+  background: -moz-linear-gradient(right, #aaa, #000);
+  background: -o-linear-gradient(right, #aaa, #000);
+  background: linear-gradient(to left, #aaa, #000);}
+    </style>
 </head>
 <body>
     <div class="navbar";">
-        <span style="width:100px; height:100px; padding: 20px;"><img src="/res/logo.png"alt="not found logo" height="100%"></span>
-        <span><a href="./login" class="navv">Log In</a></span>
-        <span><a href="./signup" class="navv">Sign Up</a></span>
-        <span><a href="./team" class="navv">Our Team</a></span>
-        <span><a href="./contact" class="navv">Contact Us</a></span>        
+        <span style="width:100px; height:100px; padding: 20px;"><a href="/"><img src="/res/logo.png"alt="not found logo" height="100%"></a></span>
+        <span><a href="/logout" class="navv">Log Out</a></span>
+        <span><a href="/team" class="navv">Our Team</a></span>
+        <span><a href="/contact" class="navv">Contact Us</a></span>        
     </div>
 
 
-
-
-
-
-
-
-    
-    <%for(i=0;i<10;i++){%>
-    <div style="width:75vw; text-align: center; margin: auto;">
-        
-    <h3><%= data["articles"][i]["title"] %></h3>
-    <button class="details"><%= data["articles"][i]["source"]["name"] %></button>
-        <button class="details"><%= data["articles"][i]["author"] %></button>
-<p><%= data["articles"][i]["description"] %></p>
-
-<button><a href="<%= data["articles"][i]["url"] %>" class="readmore" target="_blank">Read More</a></button>
+<div class="ui main text container">
+    <div class="ui top attached segment">
+        <div class="ui divided items">
+            <%for(i=0;i<10;i++){%>
+                <div class="item">
+                    <div class="image">
+                        <%if(data["articles"][i]["urlToImage"]==null){%>
+                            <img src="/res/logo.png" alt="">
+                            <%}else{%>
+                        <img src="<%= data["articles"][i]["urlToImage"] %>" alt=""><%}%>
+                    </div>
+                <div class="content">               
+                <h3><%= data["articles"][i]["title"] %></h3>
+                <span style="margin-right: 5%;"><b><i>From: <%= data["articles"][i]["source"]["name"] %></i></b></span>
+                <%if(data["articles"][i]["author"]==null){%>
+                <span><b><i>By: <%= data["articles"][i]["source"]["name"] %></i></b></span>
+                <%}else{%>
+                    <span><b><i>By: <%= data["articles"][i]["author"] %></i></b></span> <%}%>  
+                <div class="description"><%= data["articles"][i]["description"] %></div>
+                <div class="extra">
+                    <a href="<%= data["articles"][i]["url"] %>" class="ui floated violet button">READ MORE</a>
+                </div>
+            </div></div>
+                            <%}%>    
+        </div>
+    </div>
 </div>
-                <%}%>    
 </body>
 </html>

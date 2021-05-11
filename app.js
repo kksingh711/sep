@@ -1,17 +1,37 @@
 var express=require("express");
 var app=express();
+var passport=require("passport");
+const mongoose=require("mongoose");
 const request = require('request');
-app.use(express.static("public")) ;
 const http=require("http");
 const server=http.createServer(app);
 const formatMessage=require("./utils/mesageform");
-const bodyParser=require("body-parser");
+const localstrategy=require("passport-local");
+passportLocalMongoose=require("passport-local-mongoose");
+const User=require("./model/user");
+app.use(require("express-session")({
+    secret:"Any Random String",
+    resave:false,
+    saveUninitialized:false
+}));
+//mongoose.connect("mongodb://localhost:27017/wechat", { useNewUrlParser: true,useUnifiedTopology: true });
+mongoose.connect("mongodb+srv://newuser:Whyuseaws1@cluster0.hmde5.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",{useNewUrlParser: true,useUnifiedTopology: true });
+mongoose.set('useCreateIndex', true);
+app.use(express.urlencoded({extended:true}));
+app.use(express.json());
+app.use(express.static("public")) ;
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new localstrategy({
+    usernameField: 'email',
+  },User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 const {userJoin, getCurrentUser}=require("./utils/users");
 const socketio=require("socket.io");
 const io=socketio(server);
-app.use(bodyParser.urlencoded({extended:true}));
-const mongoose=require("mongoose");
-mongoose.connect("mongodb://localhost:27017/wechat", { useNewUrlParser: true,useUnifiedTopology: true });
+
+
 app.get("/",function(req,res){
     res.render("index.ejs");
 });
@@ -20,7 +40,7 @@ var topicdbSchema=new mongoose.Schema({
     imgurl:String
 });
 var topicdb=new mongoose.model("topicdb",topicdbSchema);
-app.get("/news/:id",function(req,res){
+app.get("/news/:id",isloggedin,function(req,res){
     idd=req.params.id;
     topicdb.find({_id:idd},function(err,ff){
         if(!err && ff.length>0){
@@ -62,7 +82,10 @@ socket.on("disconnect",()=>{
 app.get("/chat",function(req,res){
     res.render("chat.ejs");
 });
-app.post("/login",function(req,res){
+app.post("/login",passport.authenticate("local",{
+    successRedirect:"/selection",
+    failureRedirect:"/login"
+}),function(req,res){
     res.render("login.ejs");
 });
 app.get("/contact",function(req,res) {
@@ -71,7 +94,7 @@ app.get("/contact",function(req,res) {
 app.get("/login",function(req,res) {
     res.render("login.ejs");
 });
-app.get("/selection",function(req,res) {
+app.get("/selection",isloggedin,function(req,res) {
     let opt=req.query.opt;
     topicdb.find({},function(error,topics){
         if(error){
@@ -83,7 +106,7 @@ app.get("/selection",function(req,res) {
     });
     
 });
-app.post("/selection",function(req,res){
+app.post("/selection",isloggedin,function(req,res){
     var newtopic=req.body.topic;
     var newimg=req.body.imgurl;
     topicdb.create({
@@ -102,13 +125,31 @@ app.post("/selection",function(req,res){
 app.get("/signup",function(req,res) {
     res.render("signup.ejs");
 });
+app.post("/signup",function(req,res){
+
+
+    User.register(new User({email:req.body.email,name:req.body.username}),req.body.password,function(error,us){
+        if(!error){
+            passport.authenticate("local")(req,res,function(){
+                return res.redirect("./selection");
+            })}
+        else{
+            console.log(error);
+            return res.redirect("./signup");
+        }}
+    );
+});
+app.get("/logout",function (req,res) {
+    req.logout();
+    res.redirect("./");
+});
 app.get("/team",function(req,res) {
     res.render("team.ejs"); 
 });
 app.get("/verified",function(req,res) {
     res.render("verified.ejs");
 });
-app.get("/addnew",function(req,res){
+app.get("/addnew",isloggedin,function(req,res){
     res.render("addnew.ejs");
 });
 app.get("*",function (req,res) {
@@ -118,3 +159,9 @@ server.listen(process.env.PORT || 3000,function() {
     console.log("Server Started!!");
     
 });
+function isloggedin(req,res,next) {
+    if(req.isAuthenticated()){
+        return next();
+    }
+    res.redirect("/login");
+}

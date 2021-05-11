@@ -1,11 +1,10 @@
 var mongoose=require("mongoose");
-var passportLocalMongoose=require("passport-local-mongoose");
-
+var pls=require("passport-local-mongoose");
 var userSchema=new mongoose.Schema({
-    user:String,
-    password:String
+    email:String,
+    password:String,
+    //name is for the wechat app and for auth app you should remove it
+    name:String
 });
-
-userSchema.plugin(passportLocalMongoose);
-
-module.exports=mongoose.model("user",userSchema);
+userSchema.plugin(pls,{usernameField:"email"});
+module.exports=mongoose.model("User",userSchema);

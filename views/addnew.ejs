@@ -4,13 +4,26 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add New Topic</title>
+    <title>Login</title>
+    <link rel="stylesheet" href="../css/login.css">
 </head>
 <body>
-    <form action="/selection" method="post">
-    <input type="text" name="topic" placeholder="Your topic here">
-    <input type="text" name="imgurl" placeholder="Paste WWW image url here">
-    <input type="submit" value="Submit">
-    </form>
+    <div class="navbar">
+      <span style="width:100px; height:100px; padding: 20px;"><img src="../res/logo.png"alt="" height="100%"></span>
+      <span><a class="a1" href="./login">Log In</a></span>
+      <span><a class="a1" href="./signup">Sign Up</a></span>
+      <span><a class="a1" href="./team">Our Team</a></span>
+      <span><a class="a1" href="./contact">Contact Us</a></span>        
+    </div>
+    <div class="login-page">
+        <div class="form">
+            <h2>Add your topic here</h2>
+          <form class="login-form" method="POST" action="./selection">
+            <input type="text" name="topic" placeholder="Topic"/>
+            <input type="text" name="imgurl" placeholder="Paste topic's image URL here"/>
+            <input type="submit" value="Submit" style="background-color: skyblue;font-weight: bold;">
+          </form>
+        </div>
+      </div>
 </body>
 </html>
