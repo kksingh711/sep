@@ -12,7 +12,6 @@ const io=socketio(server);
 app.use(bodyParser.urlencoded({extended:true}));
 const mongoose=require("mongoose");
 mongoose.connect("mongodb://localhost:27017/wechat", { useNewUrlParser: true,useUnifiedTopology: true });
-const port=3000 || process.env.PORT;
 app.get("/",function(req,res){
     res.render("index.ejs");
 });
@@ -115,7 +114,7 @@ app.get("/addnew",function(req,res){
 app.get("*",function (req,res) {
     res.render("notfound.ejs");
 });
-server.listen(port,function() {
+server.listen(process.env.PORT || 3000,function() {
     console.log("Server Started!!");
     
 });
