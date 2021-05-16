@@ -14,8 +14,8 @@ app.use(require("express-session")({
     resave:false,
     saveUninitialized:false
 }));
-mongoose.connect("mongodb://localhost:27017/wechat", { useNewUrlParser: true,useUnifiedTopology: true });
-//mongoose.connect("mongodb+srv://newuser:Whyuseaws1@cluster0.hmde5.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",{useNewUrlParser: true,useUnifiedTopology: true });
+// mongoose.connect("mongodb://localhost:27017/wechat", { useNewUrlParser: true,useUnifiedTopology: true });
+mongoose.connect("mongodb+srv://newuser:Whyuseaws1@cluster0.hmde5.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",{useNewUrlParser: true,useUnifiedTopology: true });
 mongoose.set('useCreateIndex', true);
 app.use(express.urlencoded({extended:true}));
 app.use(express.json());
@@ -44,7 +44,7 @@ var topicdbSchema=new mongoose.Schema({
 });
 var topicdb=new mongoose.model("topicdb",topicdbSchema);
 app.get("/news/:id",isloggedin,function(req,res){
-    idd=req.params.id;
+    var idd=req.params.id;
     topicdb.find({_id:idd},function(err,ff){
         if(!err && ff.length>0){
             let topic=ff[0]["name"];
@@ -173,9 +173,9 @@ app.get("/logout",function (req,res) {
 app.get("/team",function(req,res) {
     res.render("team.ejs",{curUser:req.user}); 
 });
-app.get("/verified",function(req,res) {
-    res.render("verified.ejs");
-});
+// app.get("/verified",function(req,res) {
+//     res.render("verified.ejs");
+// });
 app.get("/addnew",isloggedin,function(req,res){
     res.render("addnew.ejs");
 });
