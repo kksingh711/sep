@@ -14,15 +14,20 @@ socket.emit("joinRoom",({username:user1,room:room1}));
 socket.on("hello", (arg) => {
     var newmsg=document.createElement("div");
     var ind=arg.text.indexOf("jpmk%?00");
-    if(ind==-1){
+    var indd=arg.text.indexOf("jh44gffs");
+    if(ind!=-1){
+        newmsg.classList.add("middle");
+        newmsg.innerHTML="<b><i>"+arg.username.toUpperCase()+" joined the chat</i></b>";
+    }else if(indd!=-1){
+        newmsg.classList.add("middle");
+        newmsg.innerHTML="<b><i> Welcome "+arg.username.toUpperCase()+" please follow the community guidelines while chatting.</i></b>";
+    }
+    else{
         if(arg.username==user1){
             newmsg.classList.add("right");}
         else{
             newmsg.classList.add("left");}
         newmsg.innerHTML="<b>"+arg.username+"  "+arg.time+"</b><br>"+arg.text;
-    }else{
-        newmsg.classList.add("middle");
-        newmsg.innerHTML="<b>"+arg.username+" joined the chat</b>";
     }    
     newmsg.classList.add("message");
     

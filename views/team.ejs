@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>We Chat</title>
+    <title>Our Team</title>
     <link rel="stylesheet" href="/css/index.css">
     <style>
         .contr{
@@ -30,34 +30,44 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;      
 }
+figcaption{
+    color: white;
+    font-size: xx-large;
+}
+img{
+    border-radius: 5%;
+    border:10px solid black;
+}
     </style>
 </head>
 <body>
     <div class="navbar">
         <span style="width:100px; height:100px; padding: 20px;"><a href="./"><img src="/res/logo.png"alt="not found logo" height="100%"></a></span>
+        <%if(curUser==null){%>
         <span><a href="./login" class="navv">Log In</a></span>
-        <span><a href="./signup" class="navv">Sign Up</a></span>
+        <span><a href="./signup" class="navv">Sign Up</a></span><%}else{%>
+            <span><a href="./logout" class="navv">Log Out</a></span><%}%>
         <span><a href="./team" class="navv">Our Team</a></span>
         <span><a href="./contact" class="navv">Contact Us</a></span>        
     </div>
     <div align="center" style="margin:auto;">
         <span>
             <figure>            
-                <img src="/res/bollywood.jpeg" alt="not found" class="contr">
-                <figcaption>Kanhaiya<br>CS Grad
+                <img src="/res/kanhaiya.jpg" alt="not found" class="contr">
+                <figcaption>Kanhaiya Kumar
                 </figcaption>
             </figure>
         </span>
         <span>
             <figure>            
-                <img src="/res/bollywood.jpeg" alt="not found" class="contr">
+                <img src="/res/anmol.jpeg" alt="not found" class="contr">
                 <figcaption>Anmol</figcaption>
             </figure>
         </span>
         <span>
             <figure>           
-                <img src="/res/bollywood.jpeg" alt="not found" class="contr"> 
-                <figcaption>Amit</figcaption>
+                <img src="/res/amit.jpeg" alt="not found" class="contr"> 
+                <figcaption>Amit Kumar Singh</figcaption>
             </figure>
         </span>     
         

@@ -14,8 +14,8 @@ app.use(require("express-session")({
     resave:false,
     saveUninitialized:false
 }));
-//mongoose.connect("mongodb://localhost:27017/wechat", { useNewUrlParser: true,useUnifiedTopology: true });
-mongoose.connect("mongodb+srv://newuser:Whyuseaws1@cluster0.hmde5.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",{useNewUrlParser: true,useUnifiedTopology: true });
+mongoose.connect("mongodb://localhost:27017/wechat", { useNewUrlParser: true,useUnifiedTopology: true });
+//mongoose.connect("mongodb+srv://newuser:Whyuseaws1@cluster0.hmde5.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",{useNewUrlParser: true,useUnifiedTopology: true });
 mongoose.set('useCreateIndex', true);
 app.use(express.urlencoded({extended:true}));
 app.use(express.json());
@@ -33,7 +33,10 @@ const io=socketio(server);
 
 
 app.get("/",function(req,res){
-    res.render("index.ejs",{curUser:req.user});
+    if(req.user){
+        res.redirect("/selection");
+    }else{
+    res.render("index.ejs",{curUser:req.user});}
 });
 var topicdbSchema=new mongoose.Schema({
     name:String,
@@ -67,15 +70,15 @@ socket.on("joinRoom",({username,room})=>{
 
     const user=userJoin(socket.id,username,room);
     socket.join(user.room);
-    //socket.emit("hello",formatMessage(username,"Welcome"));
+    socket.emit("hello",formatMessage(username,"jh44gffs"));
     socket.broadcast.to(user.room).emit("hello",formatMessage(username,"jpmk%?00 has joined"));
 });
 socket.on("chatMessage",({msg,user,room})=>{
     io.to(room).emit("hello",formatMessage(user,msg));
 });
-socket.on("disconnect",()=>{
-    io.emit("hello",formatMessage("fas","has left"));
-});
+// socket.on("disconnect",()=>{
+//     io.emit("hello",formatMessage("fas","has left"));
+// });
 });
 app.get("/chat/:id",function(req,res){
     res.render("chat.ejs");
@@ -93,13 +96,12 @@ app.get("/login",function(req,res) {
     res.render("login.ejs");
 });
 app.get("/selection",isloggedin,function(req,res) {
-    // let opt=req.query.opt;
     topicdb.find({},function(error,topics){
         if(error){
             console.log("Error");
         }
         else{
-            res.render("selection.ejs",{inte:topics});
+            res.render("selection.ejs",{inte:topics,currUser:req.user});
         }
     });
     
@@ -169,7 +171,7 @@ app.get("/logout",function (req,res) {
     res.redirect("./");
 });
 app.get("/team",function(req,res) {
-    res.render("team.ejs"); 
+    res.render("team.ejs",{curUser:req.user}); 
 });
 app.get("/verified",function(req,res) {
     res.render("verified.ejs");

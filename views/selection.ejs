@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Select</title>
+    <title>WeChat</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <style>        
         body {
@@ -34,12 +34,12 @@ span{
 <body>
     <div class="navbar">
         <span style="width:100px; height:100px; padding: 20px;"><a href="./"><img src="/res/logo.png"alt="not found logo" height="100%"></a></span>
-        <span><a href="./team" class="navv">Our Team</a></span>
-        <span><a href="./contact" class="navv">Contact Us</a></span>
-        <span><a href="./logout" class="navv">Log Out</a></span>        
+        <span><a style="color: inherit; text-decoration: none;" href="./team" class="navv">Our Team</a></span>
+        <span><a style="color: inherit; text-decoration: none;" href="./contact" class="navv">Contact Us</a></span>
+        <span><a style="color: inherit; text-decoration: none;" href="./logout" class="navv">Log Out</a></span>        
     </div>    
     <div class="container">
-        <h1 style="color:white;margin-top: 1rem;"">What's your mood?</h1>
+        <h1 style="color:white;margin-top: 1rem;"">Welcome <%=currUser.name%> what's your mood?</h1>
         <div class="row">
     <div class="card-deck">
         <%inte.forEach(function(ini){%>
