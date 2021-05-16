@@ -6,11 +6,18 @@
     border: 2px solid black;
     border-radius: 5px;
     border-radius: 20px;
+    word-wrap: break-word;
 }
 .left{
     float: left;
     clear: both;
     background-color: #78e08f;
+}
+.middle{
+    margin: auto;
+    background-color: rgb(197, 243, 99);
+    clear: both;
+    text-align: center;
 }
 .right{
     float:right;

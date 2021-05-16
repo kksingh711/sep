@@ -33,7 +33,7 @@ const io=socketio(server);
 
 
 app.get("/",function(req,res){
-    res.render("index.ejs");
+    res.render("index.ejs",{curUser:req.user});
 });
 var topicdbSchema=new mongoose.Schema({
     name:String,
@@ -62,15 +62,13 @@ app.get("/news/:id",isloggedin,function(req,res){
     });
     
 });
-io.on("connection",(socket) => {console.log("new web socket created");
+io.on("connection",(socket) => {
 socket.on("joinRoom",({username,room})=>{
 
     const user=userJoin(socket.id,username,room);
     socket.join(user.room);
-
-    console.log(username);
-    socket.emit("hello",formatMessage(username,"Welcome"));
-    socket.broadcast.to(user.room).emit("hello",formatMessage(username," has joined"));
+    //socket.emit("hello",formatMessage(username,"Welcome"));
+    socket.broadcast.to(user.room).emit("hello",formatMessage(username,"jpmk%?00 has joined"));
 });
 socket.on("chatMessage",({msg,user,room})=>{
     io.to(room).emit("hello",formatMessage(user,msg));
@@ -79,7 +77,7 @@ socket.on("disconnect",()=>{
     io.emit("hello",formatMessage("fas","has left"));
 });
 });
-app.get("/chat",function(req,res){
+app.get("/chat/:id",function(req,res){
     res.render("chat.ejs");
 });
 app.post("/login",passport.authenticate("local",{
@@ -95,7 +93,7 @@ app.get("/login",function(req,res) {
     res.render("login.ejs");
 });
 app.get("/selection",isloggedin,function(req,res) {
-    let opt=req.query.opt;
+    // let opt=req.query.opt;
     topicdb.find({},function(error,topics){
         if(error){
             console.log("Error");
@@ -138,6 +136,33 @@ app.post("/signup",function(req,res){
             return res.redirect("./signup");
         }}
     );
+});
+app.get("/admin",function(req,res)
+{
+    topicdb.find({},function(error,topics){
+        if(error){
+            res.send("Error");
+        }
+        else{
+            res.render("adminselection.ejs",{inte:topics});
+        }
+    });
+});
+app.get("/change/:id",function(req,res){
+    id=req.params.id;
+    
+    
+});
+app.get("/remove/:id",function(req,res){
+    id=req.params.id;
+    topicdb.deleteOne({_id:id},function(error){
+        if(!error){
+            res.redirect("/admin");
+        }
+        else{
+            res.send("Some Error Occured");
+        }
+    });
 });
 app.get("/logout",function (req,res) {
     req.logout();
